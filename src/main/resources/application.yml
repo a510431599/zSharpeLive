@@ -1,0 +1,182 @@
+server:
+  port: 8000
+debug: true
+
+
+broadcaststream:
+  auto:
+    record: false
+fileconsumer:
+  delayed:
+    write: true
+  queue:
+    size: 120
+  wait:
+    for:
+      keyframe: true
+http:
+  URIEncoding: UTF-8
+  acceptor_thread_count: 100
+  host: 0.0.0.0
+  max_headers_size: 8192
+  max_keep_alive_requests: -1
+  max_threads: 2000
+  port: 5080
+  processor_cache: 200
+https:
+  port: 5443
+jmx:
+  daemon: true
+  keystorepass: password
+  mina:
+    monitor:
+      enable: false
+    poll:
+      interval: 1000
+  register:
+    factory: true
+  registry:
+    create: true
+  reuse:
+    existing:
+      server: true
+  rmi:
+    host: localhost
+    port: 9999
+    port.remoteobjects: ''
+    sport: 9998
+  threaded: true
+keyframe:
+  cache:
+    entry:
+      max: 500
+mina:
+  logfilter:
+    enable: false
+policy:
+  host: 0.0.0.0
+  port: 843
+proxy:
+  destination_host: 127.0.0.1
+  destination_port: 1935
+  source_host: 127.0.0.1
+  source_port: 1936
+rtmp:
+  backlog: 32
+  bandwidth_detection: false
+  channel:
+    concurrency:
+      level: 1
+    initial:
+      capacity: 3
+  client_bandwidth_limit_type: 2
+  deadlockguard:
+    sheduler:
+      pool_size: 8
+  default_acceptor: true
+  default_client_bandwidth: 10000000
+  default_server_bandwidth: 10000000
+  encoder_base_tolerance: 5000
+  encoder_drop_live_future: false
+  executor:
+    core_pool_size: 4
+    max_pool_size: 32
+    queue_capacity: 64
+    queue_size_to_drop_audio_packets: 60
+  executor_keepalive_time: 600000
+  host: 0.0.0.0
+  initial_pool_size: 0
+  io_threads: 8
+  max_handling_time: 200000
+  max_handshake_time: 500000
+  max_inactivity: 60000
+  max_packet_size: 3145728
+  max_pool_size: 2
+  max_processor_pool_size: 8
+  pending:
+    calls:
+      concurrency:
+        level: 1
+      initial:
+        capacity: 3
+  ping_interval: 1000
+  port: 1935
+  addresses: 0.0.0.0:1935
+  receive_buffer_size: 65536
+  reserved:
+    streams:
+      concurrency:
+        level: 1
+      initial:
+        capacity: 1
+  scheduler:
+    pool_size: 8
+  send_buffer_size: 65536
+  stream:
+    concurrency:
+      level: 1
+    initial:
+      capacity: 1
+  tcp_keepalive: false
+  tcp_nodelay: true
+  thoughput_calc_interval: 15
+  traffic_class: -1
+  unvalidatedConnectionAllowed: true
+rtmps:
+  acceptor_thread_count: 2
+  host: 0.0.0.0
+  keystorefile: conf/keystore.jks
+  keystorepass: password
+  max_inactivity: 60000
+  max_keep_alive_requests: -1
+  max_threads: 8
+  ping_interval: 5000
+  port: 8443
+  processor_cache: 20
+  truststorefile: conf/truststore.jks
+  truststorepass: password
+rtmpt:
+  acceptor_thread_count: 2
+  encoder_base_tolerance: 5000
+  encoder_drop_live_future: true
+  host: 0.0.0.0
+  max_handshake_time: 500000
+  max_in_msg_process: 166
+  max_inactivity: 60000
+  max_keep_alive_requests: -1
+  max_queue_offer_attempts: 4
+  max_queue_offer_time: 125
+  max_threads: 8
+  ping_interval: 5000
+  port: 8088
+  processor_cache: 20
+  target_reponse_size: 32768
+so:
+  max:
+    events:
+      per:
+        update: 64
+  scheduler:
+    pool_size: 4
+  persistenceClassName: org.red5.server.persistence.FilePersistence
+subscriberstream:
+  buffer:
+    check:
+      interval: 5000
+  max:
+    pending:
+      frames: 10
+    sequential:
+      frames: 10
+  underrun:
+    trigger: 100
+war:
+  deploy:
+    server:
+      check:
+        interval: 600000
+scope:
+  persistenceClass: org.red5.server.persistence.FilePersistence
+  security:
+    connectionAllowed: true
+  name: default

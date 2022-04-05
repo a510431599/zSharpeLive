@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:lang="http://www.springframework.org/schema/lang"
+    xmlns="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd                            
+	 http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.5.xsd" >
+
+    <!-- This context is shared between all child contexts. -->
+    <!-- Server bean -->
+
+<!--    <bean-->
+<!--        id="red5.server"-->
+<!--        class="org.red5.server.Server" />-->
+<!--    &lt;!&ndash; JMX server &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="jmxFactory"-->
+<!--        class="org.red5.server.jmx.JMXFactory" >-->
+
+<!--        <property-->
+<!--            name="domain"-->
+<!--            value="org.red5.server" />-->
+<!--    </bean>-->
+
+<!--    <bean-->
+<!--        id="jmxAgent"-->
+<!--        class="org.red5.server.jmx.JMXAgent"-->
+<!--        init-method="init" >-->
+
+<!--        &lt;!&ndash; The RMI adapter allows remote connections to the MBeanServer &ndash;&gt;-->
+
+<!--        <property-->
+<!--            name="enableRmiAdapter"-->
+<!--            value="false" />-->
+
+<!--        <property-->
+<!--            name="rmiAdapterPort"-->
+<!--            value="9999" />-->
+
+<!--        <property-->
+<!--            name="rmiAdapterRemotePort"-->
+<!--            value="" />-->
+
+<!--        <property-->
+<!--            name="rmiAdapterHost"-->
+<!--            value="127.0.0.1" />-->
+
+<!--        <property-->
+<!--            name="enableSsl"-->
+<!--            value="false" />-->
+<!--        &lt;!&ndash; Starts a registry if it doesnt exist &ndash;&gt;-->
+
+<!--        <property-->
+<!--            name="startRegistry"-->
+<!--            value="false" />-->
+<!--        &lt;!&ndash; Authentication &ndash;&gt;-->
+
+<!--        <property-->
+<!--            name="remoteAccessProperties"-->
+<!--            value="access.properties" />-->
+
+<!--        <property-->
+<!--            name="remotePasswordProperties"-->
+<!--            value="password.properties" />-->
+
+<!--        <property-->
+<!--            name="remoteSSLKeystore"-->
+<!--            value="" />-->
+
+<!--        <property-->
+<!--            name="remoteSSLKeystorePass"-->
+<!--            value="" />-->
+<!--        &lt;!&ndash; Mina offers its own Mbeans so you may integrate them here &ndash;&gt;-->
+
+<!--        <property-->
+<!--            name="enableMinaMonitor"-->
+<!--            value="false" />-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; Serializes objects to AMF binary &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="serializer"-->
+<!--        class="org.red5.io.object.Serializer" />-->
+<!--    &lt;!&ndash; Deserializes objects from AMF binary &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="deserializer"-->
+<!--        class="org.red5.io.object.Deserializer" />-->
+<!--    &lt;!&ndash; Deals with StatusObjects representing statuses like FMS NetConnection.Connect.Success status &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="statusObjectService"-->
+<!--        autowire="byType"-->
+<!--        class="org.red5.server.net.rtmp.status.StatusObjectService"-->
+<!--        init-method="initialize" />-->
+<!--    &lt;!&ndash; RTMP codec factory &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="rtmpCodecFactory"-->
+<!--        autowire="byType"-->
+<!--        class="org.red5.server.net.rtmp.codec.RTMPMinaCodecFactory"-->
+<!--        init-method="init" >-->
+
+<!--        <property name="minaEncoder" >-->
+
+<!--            <bean class="org.red5.server.net.rtmp.codec.RTMPMinaProtocolEncoder" >-->
+
+<!--                <property name="serializer" >-->
+
+<!--                    <ref bean="serializer" />-->
+<!--                </property>-->
+<!--            </bean>-->
+<!--        </property>-->
+
+<!--        <property name="minaDecoder" >-->
+
+<!--            <bean class="org.red5.server.net.rtmp.codec.RTMPMinaProtocolDecoder" >-->
+
+<!--                <property name="deserializer" >-->
+
+<!--                    <ref bean="deserializer" />-->
+<!--                </property>-->
+<!--            </bean>-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; RTMPT codec factory &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="rtmptCodecFactory"-->
+<!--        autowire="byType"-->
+<!--        class="org.red5.server.net.rtmpt.codec.RTMPTCodecFactory"-->
+<!--        init-method="init" >-->
+
+<!--        <property name="serializer" >-->
+
+<!--            <ref bean="serializer" />-->
+<!--        </property>-->
+
+<!--        <property name="deserializer" >-->
+
+<!--            <ref bean="deserializer" />-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; Remoting calls codec factory &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="remotingCodecFactory"-->
+<!--        autowire="byType"-->
+<!--        class="org.red5.server.net.remoting.codec.RemotingCodecFactory"-->
+<!--        init-method="init" />-->
+<!--    &lt;!&ndash; Streamable file factory &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="streamableFileFactory"-->
+<!--        class="org.red5.io.StreamableFileFactory" >-->
+
+<!--        <property name="services" >-->
+
+<!--            <list>-->
+
+<!--                <bean-->
+<!--                    id="flvFileService"-->
+<!--                    class="org.red5.io.flv.impl.FLVService" >-->
+
+<!--                    <property-->
+<!--                        name="generateMetadata"-->
+<!--                        value="true" />-->
+<!--                </bean>-->
+
+<!--                <bean-->
+<!--                    id="mp3FileService"-->
+<!--                    class="org.red5.io.mp3.impl.MP3Service" />-->
+
+<!--                <bean-->
+<!--                    id="mp4FileService"-->
+<!--                    class="org.red5.io.mp4.impl.MP4Service" />-->
+
+<!--                <bean-->
+<!--                    id="m4aFileService"-->
+<!--                    class="org.red5.io.m4a.impl.M4AService" />-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; Thread that writes modified objects to disk periodically &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="filePersistenceThread"-->
+<!--        class="org.red5.server.persistence.FilePersistenceThread" />-->
+<!--    &lt;!&ndash; Handles creation / lookup of shared objects &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="sharedObjectService"-->
+<!--        class="org.red5.server.so.SharedObjectService" >-->
+
+<!--        <property name="persistenceClassName" >-->
+
+<!--            <value>-->
+<!--org.red5.server.persistence.FilePersistence-->
+
+<!--            </value>-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; High level access to streams &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="streamService"-->
+<!--        class="org.red5.server.stream.StreamService" />-->
+<!--    &lt;!&ndash; High level access to broadcasted streams &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="providerService"-->
+<!--        class="org.red5.server.stream.ProviderService" />-->
+<!--    &lt;!&ndash; Provides output to consumers &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="consumerService"-->
+<!--        class="org.red5.server.stream.ConsumerService" />-->
+<!--    &lt;!&ndash; Scheduling service &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="schedulingService"-->
+<!--        class="org.red5.server.scheduling.QuartzSchedulingService" />-->
+<!--    &lt;!&ndash; Use injection to setup thread pool for remoting clients &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="remotingClient"-->
+<!--        class="org.red5.server.net.remoting.RemotingClient" >-->
+
+<!--        <property-->
+<!--            name="poolSize"-->
+<!--            value="2" />-->
+<!--    </bean>-->
+<!--    &lt;!&ndash;-->
+<!--	Now we can load the cache engine, only one may be enabled at a time. If no-caching is required select the-->
+<!--	NoCacheImpl. Three other implementations based on EhCache, WhirlyCache, and Red5Cache are also available.-->
+
+
+<!--    &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="object.cache"-->
+<!--        class="org.red5.server.cache.NoCacheImpl" />-->
+<!--    &lt;!&ndash; Cache to use for keyframe metadata. &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="keyframe.cache"-->
+<!--        class="org.red5.io.FileKeyFrameMetaCache" />-->
+<!--    &lt;!&ndash;-->
+<!--	    Represents FLV files-->
+<!--	    Use injection to set the cache impl to be used with flvs-->
+
+
+<!--    &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="flv.impl"-->
+<!--        class="org.red5.io.flv.impl.FLV" >-->
+
+<!--        <property name="cache" >-->
+
+<!--            <ref bean="object.cache" />-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; Use injection to set the keyframe cache for FLV files &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="flvreader.impl"-->
+<!--        class="org.red5.io.flv.impl.FLVReader" >-->
+
+<!--        <property name="keyFrameCache" >-->
+
+<!--            <ref bean="keyframe.cache" />-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; Use injection to set the keyframe cache for MP3 files &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="mp3reader.impl"-->
+<!--        class="org.red5.io.mp3.impl.MP3Reader" >-->
+
+<!--        <property name="frameCache" >-->
+
+<!--            <ref bean="keyframe.cache" />-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; Use injection to set the buffer type for reading FLV files &ndash;&gt;-->
+
+<!--    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean" >-->
+
+<!--        <property name="staticMethod" >-->
+
+<!--            <value>-->
+<!--org.red5.io.flv.impl.FLVReader.setBufferType-->
+
+<!--            </value>-->
+<!--        </property>-->
+<!--        &lt;!&ndash; Three buffer types are available 'auto', 'heap', and 'direct' &ndash;&gt;-->
+
+<!--        <property-->
+<!--            name="arguments"-->
+<!--            value="auto" />-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; Use injection to set the buffer size for reading FLV files &ndash;&gt;-->
+
+<!--    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean" >-->
+
+<!--        <property name="staticMethod" >-->
+
+<!--            <value>-->
+<!--org.red5.io.flv.impl.FLVReader.setBufferSize-->
+
+<!--            </value>-->
+<!--        </property>-->
+<!--        &lt;!&ndash; Three buffer types are available 'auto', 'heap', and 'direct' &ndash;&gt;-->
+
+<!--        <property-->
+<!--            name="arguments"-->
+<!--            value="4096" />-->
+<!--    </bean>-->
+<!--    &lt;!&ndash;-->
+<!--         Executor that will be used to schedule stream playback to keep-->
+<!--		the client buffer filled.-->
+
+
+<!--    &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="streamExecutor"-->
+<!--        class="java.util.concurrent.ScheduledThreadPoolExecutor" >-->
+
+<!--        <constructor-arg value="16" />-->
+
+<!--        <property-->
+<!--            name="maximumPoolSize"-->
+<!--            value="64" />-->
+<!--    </bean>-->
+<!--    &lt;!&ndash;-->
+<!--         ClientBroadcastStream and PlaylistSubscriberStream-->
+<!--		that will be used by RTMPConnection and maybe other classes.-->
+<!--		These beans are lazy-init because most likely server will need-->
+<!--		to be up and running before we can get a smart implementation-->
+<!--		of these streams-->
+
+
+<!--    &ndash;&gt;-->
+
+<!--    <bean-->
+<!--        id="playlistSubscriberStream"-->
+<!--        class="org.red5.server.stream.PlaylistSubscriberStream"-->
+<!--        lazy-init="true"-->
+<!--        scope="prototype" >-->
+
+<!--        <property-->
+<!--            name="executor"-->
+<!--            ref="streamExecutor" />-->
+<!--        &lt;!&ndash;-->
+<!--             Check for buffer underruns every X ms and generate NetStream.Play.InsufficientBW accordingly.-->
+<!--		     Set to 0 to disable. Be careful not to set this value too small to avoid network congestion.-->
+
+
+<!--        &ndash;&gt;-->
+
+<!--        <property-->
+<!--            name="bufferCheckInterval"-->
+<!--            value="5000" />-->
+<!--        &lt;!&ndash;-->
+<!--             A NetStream.Play.InsufficientBW message is generated if more than X messages are queued for sending on the connection.-->
+<!--		     This value will also control the maximum pending messages on the server. To use a smaller value on slow connections-->
+<!--		     to get smaller delay for downstream server commands.-->
+
+
+<!--        &ndash;&gt;-->
+
+<!--        <property-->
+<!--            name="underrunTrigger"-->
+<!--            value="10" />-->
+<!--    </bean>-->
+
+<!--    <bean-->
+<!--        id="clientBroadcastStream"-->
+<!--        class="org.red5.server.stream.ClientBroadcastStream"-->
+<!--        lazy-init="true"-->
+<!--        scope="prototype" />-->
+
+</beans>
