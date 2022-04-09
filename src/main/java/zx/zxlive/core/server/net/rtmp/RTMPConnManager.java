@@ -70,7 +70,7 @@ public class RTMPConnManager implements IConnectionManager<RTMPConnection>, Appl
             log.debug("Checking {} connections", allConns.size());
             for (RTMPConnection conn : allConns) {
                 if (log.isTraceEnabled()) {
-                    log.trace("{} session: {} state: {} keep-alive running: {}", new Object[] { conn.getClass().getSimpleName(), conn.getSessionId(), RTMP.states[conn.getStateCode()], conn.running });
+                    log.trace("{} session: {} state: {} keep-alive running: {}", conn.getClass().getSimpleName(), conn.getSessionId(), RTMP.states[conn.getStateCode()], conn.running);
                     log.trace("Decoder lock - permits: {} queue length: {}", conn.decoderLock.availablePermits(), conn.decoderLock.getQueueLength());
                     log.trace("Encoder lock - permits: {} queue length: {}", conn.encoderLock.availablePermits(), conn.encoderLock.getQueueLength());
                     log.trace("Client streams: {} used: {}", conn.getStreams().size(), conn.getUsedStreamCount());

@@ -37,7 +37,7 @@ public class InMemoryPushPushPipe extends AbstractPipe {
         if (consumer instanceof IPushableConsumer) {
             boolean success = super.subscribe(consumer, paramMap);
             if (log.isDebugEnabled()) {
-                log.debug("Consumer subscribe{} {} params: {}", new Object[] { (success ? "d" : " failed"), consumer, paramMap });
+                log.debug("Consumer subscribe{} {} params: {}", (success ? "d" : " failed"), consumer, paramMap);
             }
             if (success) {
                 fireConsumerConnectionEvent(consumer, PipeConnectionEvent.EventType.CONSUMER_CONNECT_PUSH, paramMap);
@@ -53,7 +53,7 @@ public class InMemoryPushPushPipe extends AbstractPipe {
     public boolean subscribe(IProvider provider, Map<String, Object> paramMap) {
         boolean success = super.subscribe(provider, paramMap);
         if (log.isDebugEnabled()) {
-            log.debug("Provider subscribe{} {} params: {}", new Object[] { (success ? "d" : " failed"), provider, paramMap });
+            log.debug("Provider subscribe{} {} params: {}", (success ? "d" : " failed"), provider, paramMap);
         }
         if (success) {
             fireProviderConnectionEvent(provider, PipeConnectionEvent.EventType.PROVIDER_CONNECT_PUSH, paramMap);

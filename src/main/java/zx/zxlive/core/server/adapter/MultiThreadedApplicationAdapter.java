@@ -367,8 +367,8 @@ public class MultiThreadedApplicationAdapter extends StatefulScopeWrappingAdapte
                                 //if there are props add them
                                 Map<String, Object> props = desc.getProperties();
                                 if (props != null) {
-                                    Method setProps = returnClass.getClass().getMethod("setProperties", new Class[] { Map.class });
-                                    setProps.invoke(returnClass, new Object[] { props });
+                                    Method setProps = returnClass.getClass().getMethod("setProperties", Map.class);
+                                    setProps.invoke(returnClass, props);
                                 }
                                 //initialize
                                 Method init = returnClass.getClass().getMethod("init", (Class[]) null);
@@ -1229,25 +1229,25 @@ public class MultiThreadedApplicationAdapter extends StatefulScopeWrappingAdapte
         long startTime = stream.getStartTime() > 0 ? stream.getStartTime() : now;
         long publishDuration = Math.max((now - startTime) / 1000, 0L);
         if (conn != null) {
-            log.info("W3C x-category:stream x-event:unpublish c-ip:{} cs-bytes:{} sc-bytes:{} x-sname:{} x-file-length:{} x-name:{}", new Object[] { conn.getRemoteAddress(), conn.getReadBytes(), conn.getWrittenBytes(), stream.getName(), publishDuration, stream.getPublishedName() });
+            log.info("W3C x-category:stream x-event:unpublish c-ip:{} cs-bytes:{} sc-bytes:{} x-sname:{} x-file-length:{} x-name:{}", conn.getRemoteAddress(), conn.getReadBytes(), conn.getWrittenBytes(), stream.getName(), publishDuration, stream.getPublishedName());
         } else {
-            log.info("W3C x-category:stream x-event:unpublish x-sname:{} x-file-length:{} x-name:{}", new Object[] { stream.getName(), publishDuration, stream.getPublishedName() });
+            log.info("W3C x-category:stream x-event:unpublish x-sname:{} x-file-length:{} x-name:{}", stream.getName(), publishDuration, stream.getPublishedName());
         }
         String recordingName = stream.getSaveFilename();
         // if its not null then we did a recording
         if (recordingName != null) {
             if (conn != null) {
                 // use cs-bytes for file size for now
-                log.info("W3C x-category:stream x-event:recordstop c-ip:{} cs-bytes:{} sc-bytes:{} x-sname:{} x-file-name:{} x-file-length:{} x-file-size:{}", new Object[] { conn.getRemoteAddress(), conn.getReadBytes(), conn.getWrittenBytes(), stream.getName(), recordingName, publishDuration, conn.getReadBytes() });
+                log.info("W3C x-category:stream x-event:recordstop c-ip:{} cs-bytes:{} sc-bytes:{} x-sname:{} x-file-name:{} x-file-length:{} x-file-size:{}", conn.getRemoteAddress(), conn.getReadBytes(), conn.getWrittenBytes(), stream.getName(), recordingName, publishDuration, conn.getReadBytes());
             } else {
-                log.info("W3C x-category:stream x-event:recordstop x-sname:{} x-file-name:{} x-file-length:{}", new Object[] { stream.getName(), recordingName, publishDuration });
+                log.info("W3C x-category:stream x-event:recordstop x-sname:{} x-file-name:{} x-file-length:{}", stream.getName(), recordingName, publishDuration);
             }
             // if the stream length is 0 bytes then delete it, this is a fix for SN-20
             // get the web root
             String webappsPath = System.getProperty("red5.webapp.root");
             // add context name
             File file = new File(webappsPath, getName() + '/' + recordingName);
-            if (file != null) {
+            if (file .exists()) {
                 log.debug("File path: {}", file.getAbsolutePath());
                 if (file.exists()) {
                     // if publish duration or length are zero
@@ -1270,7 +1270,8 @@ public class MultiThreadedApplicationAdapter extends StatefulScopeWrappingAdapte
 
     public void streamPlayItemPlay(ISubscriberStream stream, IPlayItem item, boolean isLive) {
         // log w3c connect event
-        log.info("W3C x-category:stream x-event:play c-ip:{} x-sname:{} x-name:{}", new Object[] { Red5.getConnectionLocal().getRemoteAddress(), stream.getName(), item.getName() });
+        IConnection iConnection = Red5.getConnectionLocal();
+        log.info("W3C x-category:stream x-event:play c-ip:{} x-sname:{} x-name:{}", iConnection != null ? iConnection.getRemoteAddress() : null, stream.getName(), item.getName());
     }
 
     public void streamPlayItemStop(ISubscriberStream stream, IPlayItem item) {
@@ -1309,18 +1310,20 @@ public class MultiThreadedApplicationAdapter extends StatefulScopeWrappingAdapte
                     log.debug("ProviderService was null");
                 }
             }
-            log.info("W3C x-category:stream x-event:stop c-ip:{} cs-bytes:{} sc-bytes:{} x-sname:{} x-file-length:{} x-file-size:{} x-name:{}", new Object[] { remoteAddress, readBytes, writtenBytes, stream.getName(), playDuration, playItemSize, playItemName });
+            log.info("W3C x-category:stream x-event:stop c-ip:{} cs-bytes:{} sc-bytes:{} x-sname:{} x-file-length:{} x-file-size:{} x-name:{}", remoteAddress, readBytes, writtenBytes, stream.getName(), playDuration, playItemSize, playItemName);
         }
     }
 
     public void streamPlayItemPause(ISubscriberStream stream, IPlayItem item, int position) {
         // log w3c connect event
-        log.info("W3C x-category:stream x-event:pause c-ip:{} x-sname:{}", Red5.getConnectionLocal().getRemoteAddress(), stream.getName());
+        IConnection iConnection = Red5.getConnectionLocal();
+        log.info("W3C x-category:stream x-event:pause c-ip:{} x-sname:{}", iConnection != null ? iConnection.getRemoteAddress() : null, stream.getName());
     }
 
     public void streamPlayItemResume(ISubscriberStream stream, IPlayItem item, int position) {
         // log w3c connect event
-        log.info("W3C x-category:stream x-event:unpause c-ip:{} x-sname:{}", Red5.getConnectionLocal().getRemoteAddress(), stream.getName());
+        IConnection iConnection = Red5.getConnectionLocal();
+        log.info("W3C x-category:stream x-event:pause c-ip:{} x-sname:{}", iConnection != null ? iConnection.getRemoteAddress() : null, stream.getName());
     }
 
     public void streamPlayItemSeek(ISubscriberStream stream, IPlayItem item, int position) {
@@ -1330,30 +1333,35 @@ public class MultiThreadedApplicationAdapter extends StatefulScopeWrappingAdapte
     public void streamPublishStart(IBroadcastStream stream) {
         // log w3c connect event
         IConnection connection = Red5.getConnectionLocal();
-        log.info("W3C x-category:stream x-event:publish c-ip:{} x-sname:{} x-name:{}", new Object[] { connection != null ? connection.getRemoteAddress() : "0.0.0.0", stream.getName(), stream.getPublishedName() });
+        log.info("W3C x-category:stream x-event:publish c-ip:{} x-sname:{} x-name:{}", connection != null ? connection.getRemoteAddress() : "0.0.0.0", stream.getName(), stream.getPublishedName());
     }
 
     public void streamRecordStart(IBroadcastStream stream) {
         // log w3c connect event
         IConnection connection = Red5.getConnectionLocal();
-        log.info("W3C x-category:stream x-event:record-start c-ip:{} x-sname:{} x-file-name:{}", new Object[] { connection != null ? connection.getRemoteAddress() : "0.0.0.0", stream.getName(), stream.getSaveFilename() });
+        log.info("W3C x-category:stream x-event:record-start c-ip:{} x-sname:{} x-file-name:{}", connection != null ? connection.getRemoteAddress() : "0.0.0.0", stream.getName(), stream.getSaveFilename());
     }
 
     public void streamRecordStop(IBroadcastStream stream) {
         // log w3c connect event
         IConnection connection = Red5.getConnectionLocal();
-        log.info("W3C x-category:stream x-event:record-stop c-ip:{} x-sname:{} x-file-name:{}", new Object[] { connection != null ? connection.getRemoteAddress() : "0.0.0.0", stream.getName(), stream.getSaveFilename() });
+        log.info("W3C x-category:stream x-event:record-stop c-ip:{} x-sname:{} x-file-name:{}", connection != null ? connection.getRemoteAddress() : "0.0.0.0", stream.getName(), stream.getSaveFilename());
     }
 
     public void streamSubscriberClose(ISubscriberStream stream) {
         // log w3c connect event
         IConnection conn = Red5.getConnectionLocal();
-        log.info("W3C x-category:stream x-event:stop c-ip:{} cs-bytes:{} sc-bytes:{} x-sname:{}", new Object[] { conn.getRemoteAddress(), conn.getReadBytes(), conn.getWrittenBytes(), stream.getName() });
+        if (conn != null) {
+            log.info("W3C x-category:stream x-event:stop c-ip:{} cs-bytes:{} sc-bytes:{} x-sname:{}", conn.getRemoteAddress(), conn.getReadBytes(), conn.getWrittenBytes(), stream.getName());
+        }
     }
 
     public void streamSubscriberStart(ISubscriberStream stream) {
         // log w3c connect event
-        log.info("W3C x-category:stream x-event:play c-ip:{} x-sname:{}", Red5.getConnectionLocal().getRemoteAddress(), stream.getName());
+        IConnection connection = Red5.getConnectionLocal();
+        if (connection != null) {
+            log.info("W3C x-category:stream x-event:play c-ip:{} x-sname:{}", connection.getRemoteAddress(), stream.getName());
+        }
     }
 
     @Override

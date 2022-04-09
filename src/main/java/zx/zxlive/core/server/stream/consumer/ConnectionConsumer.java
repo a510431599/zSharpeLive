@@ -93,7 +93,7 @@ public class ConnectionConsumer implements IPushableConsumer, IPipeConnectionLis
      *            Data channel
      */
     public ConnectionConsumer(RTMPConnection conn, Channel videoChannel, Channel audioChannel, Channel dataChannel) {
-        log.debug("Channel ids - video: {} audio: {} data: {}", new Object[] { videoChannel, audioChannel, dataChannel });
+        log.debug("Channel ids - video: {} audio: {} data: {}", videoChannel, audioChannel, dataChannel);
         this.conn = conn;
         this.video = videoChannel;
         this.audio = audioChannel;
@@ -228,7 +228,7 @@ public class ConnectionConsumer implements IPushableConsumer, IPipeConnectionLis
             log.debug("Unhandled push message: {}", message);
             if (log.isTraceEnabled()) {
                 Class<? extends IMessage> clazz = message.getClass();
-                log.trace("Class info - name: {} declaring: {} enclosing: {}", new Object[] { clazz.getName(), clazz.getDeclaringClass(), clazz.getEnclosingClass() });
+                log.trace("Class info - name: {} declaring: {} enclosing: {}", clazz.getName(), clazz.getDeclaringClass(), clazz.getEnclosingClass());
             }
         }
     }

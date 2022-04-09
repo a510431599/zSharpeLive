@@ -126,7 +126,7 @@ public class ContextLoader implements ApplicationContextAware, InitializingBean,
                     }
                     configReplaced = configReplaced.replace(String.format("${%s}", sysProp), systemPropValue);
                 }
-                log.info("Loading: {} = {} => {}", new Object[] { name, config, configReplaced });
+                log.info("Loading: {} = {} => {}", name, config, configReplaced);
                 matcher.reset();
                 // Load context
                 loadContext(name, configReplaced);
@@ -171,7 +171,7 @@ public class ContextLoader implements ApplicationContextAware, InitializingBean,
         }
         // if parent context was not set then lookup red5.common
         if (parentContext == null) {
-            log.debug("Lookup common - bean:{} local:{} singleton:{}", new Object[] { factory.containsBean("red5.common"), factory.containsLocalBean("red5.common"), factory.containsSingleton("red5.common"), });
+            log.debug("Lookup common - bean:{} local:{} singleton:{}", factory.containsBean("red5.common"), factory.containsLocalBean("red5.common"), factory.containsSingleton("red5.common"));
             parentContext = (ApplicationContext) factory.getBean("red5.common");
         }
         if (config.startsWith("/")) {

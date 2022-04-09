@@ -122,7 +122,7 @@ public class ProviderService implements IProviderService {
     /** {@inheritDoc} */
     public boolean registerBroadcastStream(IScope scope, String name, IBroadcastStream bs) {
         if (log.isDebugEnabled()) {
-            log.debug("Registering - name: {} stream: {} scope: {}", new Object[] { name, bs, scope });
+            log.debug("Registering - name: {} stream: {} scope: {}", name, bs, scope);
             ((Scope) scope).dump();
         }
         IBroadcastScope broadcastScope = scope.getBroadcastScope(name);
@@ -158,7 +158,7 @@ public class ProviderService implements IProviderService {
     /** {@inheritDoc} */
     public boolean unregisterBroadcastStream(IScope scope, String name, IBroadcastStream bs) {
         if (log.isDebugEnabled()) {
-            log.debug("Unregistering - name: {} stream: {} scope: {}", new Object[] { name, bs, scope });
+            log.debug("Unregistering - name: {} stream: {} scope: {}", name, bs, scope);
             ((Scope) scope).dump();
         }
         IBroadcastScope broadcastScope = scope.getBroadcastScope(name);

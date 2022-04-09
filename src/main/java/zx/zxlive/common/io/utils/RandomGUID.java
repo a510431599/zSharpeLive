@@ -70,7 +70,7 @@ public class RandomGUID extends Object {
      * @return formatted string
      */
     public static String getPrettyFormatted(String str) {
-        return String.format("%s-%s-%s-%s-%s", new Object[] { str.substring(0, 8), str.substring(8, 12), str.substring(12, 16), str.substring(16, 20), str.substring(20) });
+        return String.format("%s-%s-%s-%s-%s", str.substring(0, 8), str.substring(8, 12), str.substring(12, 16), str.substring(16, 20), str.substring(20));
     }
 
     public static String create() {

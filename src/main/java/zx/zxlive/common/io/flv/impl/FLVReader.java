@@ -378,7 +378,7 @@ public class FLVReader implements IoConstants, ITagReader, IKeyFrameDataAnalyzer
      */
     private void postInitialize() {
         if (log.isDebugEnabled()) {
-            log.debug("FLVReader 1 - Buffer size: {} position: {} remaining: {}", new Object[] { getTotalBytes(), getCurrentPosition(), getRemainingBytes() });
+            log.debug("FLVReader 1 - Buffer size: {} position: {} remaining: {}", getTotalBytes(), getCurrentPosition(), getRemainingBytes());
         }
         if (getRemainingBytes() >= 9) {
             decodeHeader();
@@ -829,7 +829,7 @@ public class FLVReader implements IoConstants, ITagReader, IKeyFrameDataAnalyzer
                 if (newPosition >= getTotalBytes()) {
                     log.error("New position exceeds limit");
                     if (log.isDebugEnabled()) {
-                        log.debug("-----\nKeyframe analysis\n\tdata type={} bodysize={}\n\tremaining={} limit={}\n\tnew pos={} pos={}\n-----", new Object[] { tmpTag.getDataType(), tmpTag.getBodySize(), getRemainingBytes(), getTotalBytes(), newPosition, pos });
+                        log.debug("-----\nKeyframe analysis\n\tdata type={} bodysize={}\n\tremaining={} limit={}\n\tnew pos={} pos={}\n-----", tmpTag.getDataType(), tmpTag.getBodySize(), getRemainingBytes(), getTotalBytes(), newPosition, pos);
                     }
                     //XXX Paul: A runtime exception is probably not needed here
                     log.info("New position {} exceeds limit {}", newPosition, getTotalBytes());
@@ -921,7 +921,7 @@ public class FLVReader implements IoConstants, ITagReader, IKeyFrameDataAnalyzer
         int timestamp = IOUtils.readExtendedMediumInt(in);
         int streamId = IOUtils.readUnsignedMediumInt(in);
         if (log.isDebugEnabled()) {
-            log.debug("Data type: {} timestamp: {} stream id: {} body size: {} previous tag size: {}", new Object[] { dataType, timestamp, streamId, bodySize, previousTagSize });
+            log.debug("Data type: {} timestamp: {} stream id: {} body size: {} previous tag size: {}", dataType, timestamp, streamId, bodySize, previousTagSize);
         }
         return new Tag(dataType, timestamp, bodySize, null, previousTagSize);
     }

@@ -540,7 +540,7 @@ public class RTMPTServlet extends HttpServlet {
                 }
             }
         }
-        log.debug("Request - method: {} content type: {} path: {}", new Object[] { req.getMethod(), req.getContentType(), req.getServletPath() });
+        log.debug("Request - method: {} content type: {} path: {}", req.getMethod(), req.getContentType(), req.getServletPath());
         // allow only POST requests with valid content length
         if (!REQUEST_METHOD.equals(req.getMethod()) || req.getContentLength() == 0) {
             // Bad request - return simple error page

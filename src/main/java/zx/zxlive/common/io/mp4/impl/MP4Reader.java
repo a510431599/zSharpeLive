@@ -403,7 +403,7 @@ public class MP4Reader implements IoConstants, ITagReader, IKeyFrameDataAnalyzer
             }
             //calculate FPS
             fps = (videoSampleCount * timeScale) / (double) duration;
-            log.debug("FPS calc: ({} * {}) / {}", new Object[] { videoSampleCount, timeScale, duration });
+            log.debug("FPS calc: ({} * {}) / {}", videoSampleCount, timeScale, duration);
             log.debug("FPS: {}", fps);
             //real duration
             StringBuilder sb = new StringBuilder();
@@ -790,7 +790,7 @@ public class MP4Reader implements IoConstants, ITagReader, IKeyFrameDataAnalyzer
                                 audioCodecId = "mp3";
                                 break;
                         }
-                        log.debug("Audio coder type: {} {} id: {}", new Object[] { audioCoderType, Integer.toBinaryString(audioCoderType), audioCodecId });
+                        log.debug("Audio coder type: {} {} id: {}", audioCoderType, Integer.toBinaryString(audioCoderType), audioCodecId);
                     } else {
                         log.debug("Audio specific config was not found");
                         DecoderSpecificInfo info = configDescriptor.getDecoderSpecificInfo();
@@ -1174,7 +1174,7 @@ public class MP4Reader implements IoConstants, ITagReader, IKeyFrameDataAnalyzer
     public ITag readTag() {
         ITag tag = null;
         if (log.isTraceEnabled()) {
-            log.trace("Read tag - prevFrameSize {} audio: {} video: {}", new Object[] { prevFrameSize, audioCount, videoCount });
+            log.trace("Read tag - prevFrameSize {} audio: {} video: {}", prevFrameSize, audioCount, videoCount);
         }
         // ensure there are frames before proceeding
         if (!frames.isEmpty()) {

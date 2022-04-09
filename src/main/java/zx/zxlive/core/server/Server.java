@@ -198,7 +198,7 @@ public class Server implements IServer, ApplicationContextAware, InitializingBea
      * @return true if mapping was added, false if already exist
      */
     public boolean addMapping(String hostName, String contextPath, String globalName) {
-        log.info("Add mapping global: {} host: {} context: {}", new Object[] { globalName, hostName, contextPath });
+        log.info("Add mapping global: {} host: {} context: {}", globalName, hostName, contextPath);
         final String key = getKey(hostName, contextPath);
         log.debug("Add mapping: {} => {}", key, globalName);
         return (mapping.putIfAbsent(key, globalName) == null);

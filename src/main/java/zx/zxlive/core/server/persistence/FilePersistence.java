@@ -672,7 +672,7 @@ public class FilePersistence extends RamPersistence {
                     log.warn("Object persist failed for: {}", persistable);
                 }
             } catch (Throwable e) {
-                log.error("Error while saving {} in {}. {}", new Object[] { persistable, this, e });
+                log.error("Error while saving {} in {}. {}", persistable, this, e);
             }
         }
     }

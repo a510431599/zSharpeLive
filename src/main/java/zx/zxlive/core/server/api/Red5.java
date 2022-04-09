@@ -246,7 +246,7 @@ public final class Red5 {
         Red5 instance = null;
         if (cd.containsKey("connection")) {
             Object cn = cd.get("connection");
-            if (cn != null && cn instanceof IConnection) {
+            if (cn instanceof IConnection) {
                 instance = new Red5((IConnection) cn);
             } else {
                 instance = new Red5();

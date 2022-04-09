@@ -289,7 +289,7 @@ public class RTMPHandler extends BaseRTMPHandler implements DisposableBean {
                     case RECEIVE_AUDIO:
                         IStreamService streamService = (IStreamService) ScopeUtils.getScopeService(conn.getScope(), IStreamService.class, StreamService.class);
                         try {
-                            log.debug("Invoking {} from {} with service: {}", new Object[] { call, conn.getSessionId(), streamService });
+                            log.debug("Invoking {} from {} with service: {}", call, conn.getSessionId(), streamService);
                             if (invokeCall(conn, call, streamService)) {
                                 log.debug("Stream service invoke {} success", action);
                             } else {
@@ -343,7 +343,7 @@ public class RTMPHandler extends BaseRTMPHandler implements DisposableBean {
                         if (scope != null) {
                             if (isDebug) {
                                 log.debug("Connecting to: {}", scope.getName());
-                                log.debug("Conn {}, scope {}, call {} args {}", new Object[] { conn, scope, call, call.getArguments() });
+                                log.debug("Conn {}, scope {}, call {} args {}", conn, scope, call, call.getArguments());
                             }
                             // if scope connection is allowed
                             if (scope.isConnectionAllowed(conn)) {
@@ -583,7 +583,7 @@ public class RTMPHandler extends BaseRTMPHandler implements DisposableBean {
     @Override
     protected void onSharedObject(RTMPConnection conn, Channel channel, Header source, SharedObjectMessage message) {
         if (isDebug) {
-            log.debug("onSharedObject - conn: {} channel: {} so message: {}", new Object[] { conn.getSessionId(), channel.getId(), message });
+            log.debug("onSharedObject - conn: {} channel: {} so message: {}", conn.getSessionId(), channel.getId(), message);
         }
         final IScope scope = conn.getScope();
         if (scope != null) {

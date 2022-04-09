@@ -380,7 +380,7 @@ public class M4AReader implements IoConstants, ITagReader {
                                 audioCodecId = "mp3";
                                 break;
                         }
-                        log.debug("Audio coder type: {} {} id: {}", new Object[] { audioCoderType, Integer.toBinaryString(audioCoderType), audioCodecId });
+                        log.debug("Audio coder type: {} {} id: {}", audioCoderType, Integer.toBinaryString(audioCoderType), audioCodecId);
                     } else {
                         log.debug("Audio specific config was not found");
                         DecoderSpecificInfo info = configDescriptor.getDecoderSpecificInfo();

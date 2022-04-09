@@ -80,7 +80,7 @@ public class Input extends zx.zxlive.common.io.amf.Input implements zx.zxlive.co
          */
         public ClassReference(String className, int type, List<String> attributeNames) {
             if (log.isDebugEnabled()) {
-                log.debug("Class reference - className: {} type: {} attributeNames: {}", new Object[] { className, type, attributeNames });
+                log.debug("Class reference - className: {} type: {} attributeNames: {}", className, type, attributeNames);
             }
             this.className = className;
             this.type = type;
@@ -110,7 +110,7 @@ public class Input extends zx.zxlive.common.io.amf.Input implements zx.zxlive.co
 
             PendingProperty(Object obj, Class<?> klass, String name) {
                 if (log.isDebugEnabled()) {
-                    log.debug("Pending property - obj: {} class: {} name: {}", new Object[] { obj, klass, name });
+                    log.debug("Pending property - obj: {} class: {} name: {}", obj, klass, name);
                 }
                 this.obj = obj;
                 this.klass = klass;
@@ -484,7 +484,7 @@ public class Input extends zx.zxlive.common.io.amf.Input implements zx.zxlive.co
     @Override
     public Object readArray(Type target) {
         int count = readInteger();
-        log.debug("Count: {} and {} ref {}", new Object[] { count, (count & 1), (count >> 1) });
+        log.debug("Count: {} and {} ref {}", count, (count & 1), (count >> 1));
         if ((count & 1) == 0) {
             //Reference
             Object ref = getReference(count >> 1);
@@ -588,7 +588,7 @@ public class Input extends zx.zxlive.common.io.amf.Input implements zx.zxlive.co
     public Object readObject() {
         log.trace("readObject - amf3_mode: {}", amf3_mode);
         int type = readInteger();
-        log.debug("Type: {} and {} ref {}", new Object[] { type, (type & 1), (type >> 1) });
+        log.debug("Type: {} and {} ref {}", type, (type & 1), (type >> 1));
         if ((type & 1) == 0) {
             // Reference
             Object ref = getReference(type >> 1);

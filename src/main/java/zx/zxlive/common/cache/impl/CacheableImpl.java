@@ -44,7 +44,7 @@ public class CacheableImpl implements ICacheable {
     public CacheableImpl(IoBuffer buffer) {
         if (log.isDebugEnabled()) {
             log.debug("Buffer is direct: {} capacity: {}", buffer.isDirect(), buffer.capacity());
-            log.debug("Buffer limit: {} remaining: {} position: {}", new Object[] { buffer.limit(), buffer.remaining(), buffer.position() });
+            log.debug("Buffer limit: {} remaining: {} position: {}", buffer.limit(), buffer.remaining(), buffer.position());
         }
         bytes = new byte[buffer.remaining()];
         buffer.rewind();

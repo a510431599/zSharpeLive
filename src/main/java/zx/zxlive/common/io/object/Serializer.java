@@ -361,7 +361,7 @@ public class Serializer {
      * @return true if the field should be serialized, otherwise false
      */
     public static boolean serializeField(String keyName, Field field, Method getter) {
-        log.trace("serializeField - keyName: {} field: {} method: {}", new Object[] { keyName, field, getter });
+        log.trace("serializeField - keyName: {} field: {} method: {}", keyName, field, getter);
         // if "field" is a class or is transient, skip it
         if ("class".equals(keyName)) {
             return false;

@@ -258,13 +258,13 @@ public class RTMPProtocolEncoder implements Constants, IEventEncoder {
             long incomingLatency = clockTimeOfMessage - now;
 
             if (log.isDebugEnabled()) {
-                log.debug("incomingLatency={} clockTimeOfMessage={} getClockStartTime={} timestamp={} getStreamStartTime={} now={}", new Object[] { incomingLatency, clockTimeOfMessage, mapping.getClockStartTime(), timestamp, mapping.getStreamStartTime(), now });
+                log.debug("incomingLatency={} clockTimeOfMessage={} getClockStartTime={} timestamp={} getStreamStartTime={} now={}", incomingLatency, clockTimeOfMessage, mapping.getClockStartTime(), timestamp, mapping.getStreamStartTime(), now);
             }
             //TDJ: EXPERIMENTAL dropping for LIVE packets in future (default false)
             if (isLiveStream && dropLiveFuture) {
                 incomingLatency = Math.abs(incomingLatency);
                 if (log.isDebugEnabled()) {
-                    log.debug("incomingLatency={} clockTimeOfMessage={} now={}", new Object[] { incomingLatency, clockTimeOfMessage, now });
+                    log.debug("incomingLatency={} clockTimeOfMessage={} now={}", incomingLatency, clockTimeOfMessage, now);
                 }
             }
             // NOTE: We could decide to drop the message here because it is very late due to incoming traffic congestion.
@@ -280,21 +280,21 @@ public class RTMPProtocolEncoder implements Constants, IEventEncoder {
                     // The outgoingLatency is the ping RTT minus the incoming latency.
                     outgoingLatency = lastPingPongInterval - incomingLatency;
                     if (log.isDebugEnabled()) {
-                        log.debug("outgoingLatency={} lastPingTime={}", new Object[] { outgoingLatency, lastPingPongInterval });
+                        log.debug("outgoingLatency={} lastPingTime={}", outgoingLatency, lastPingPongInterval);
                     }
                 }
             }
             //TODO: how should we differ handling based on live or vod?
             //TODO: if we are VOD do we "pause" the provider when we are consistently late?
             if (log.isTraceEnabled()) {
-                log.trace("Packet timestamp: {}; latency: {}; now: {}; message clock time: {}, dropLiveFuture: {}", new Object[] { timestamp, incomingLatency, now, clockTimeOfMessage, dropLiveFuture });
+                log.trace("Packet timestamp: {}; latency: {}; now: {}; message clock time: {}, dropLiveFuture: {}", timestamp, incomingLatency, now, clockTimeOfMessage, dropLiveFuture);
             }
             if (outgoingLatency < baseTolerance) {
                 // no traffic congestion in outgoing direction
             } else if (outgoingLatency > highestTolerance) {
                 // traffic congestion in outgoing direction
                 if (log.isDebugEnabled()) {
-                    log.debug("Outgoing direction congested. outgoingLatency={} highestTolerance={}", new Object[] { outgoingLatency, highestTolerance });
+                    log.debug("Outgoing direction congested. outgoingLatency={} highestTolerance={}", outgoingLatency, highestTolerance);
                 }
                 if (isDroppable) {
                     mapping.setKeyFrameNeeded(true);

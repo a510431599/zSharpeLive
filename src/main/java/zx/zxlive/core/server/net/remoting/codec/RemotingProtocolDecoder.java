@@ -94,7 +94,7 @@ public class RemotingProtocolDecoder {
             boolean required = in.get() == 0x01;
             int size = in.getInt();
             Object value = Deserializer.deserialize(input, Object.class);
-            log.debug("Header: {} Required: {} Size: {} Value: {}", new Object[] { name, required, size, value });
+            log.debug("Header: {} Required: {} Size: {} Value: {}", name, required, size, value);
             result.put(name, value);
         }
         return result;

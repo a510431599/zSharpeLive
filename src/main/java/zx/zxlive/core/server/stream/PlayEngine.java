@@ -894,7 +894,7 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
             final long buffer = subscriberStream.getClientBufferDuration();
             // expected amount of data present in client buffer
             final long buffered = lastMessageTs - delta;
-            log.trace("isClientBufferFull: timestamp {} delta {} buffered {} buffer duration {}", new Object[] { lastMessageTs, delta, buffered, buffer });
+            log.trace("isClientBufferFull: timestamp {} delta {} buffered {} buffer duration {}", lastMessageTs, delta, buffered, buffer);
             // fix for SN-122, this sends double the size of the client buffer
             if (buffer > 0 && buffered > (buffer * 2)) {
                 // client is likely to have enough data in the buffer
@@ -911,7 +911,7 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
             final long delta = System.currentTimeMillis() - playbackStart;
             // expected amount of data present in client buffer
             final long buffered = lastMessageTs - delta;
-            log.trace("isClientBufferEmpty: timestamp {} delta {} buffered {}", new Object[] { lastMessageTs, delta, buffered });
+            log.trace("isClientBufferEmpty: timestamp {} delta {} buffered {}", lastMessageTs, delta, buffered);
             if (buffered < 0) {
                 return true;
             }
@@ -1021,7 +1021,7 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
         if (log.isTraceEnabled()) {
             log.trace("Source type - in: {} out: {}", eventIn.getSourceType(), messageOut.getBody().getSourceType());
             long delta = System.currentTimeMillis() - playbackStart;
-            log.trace("sendMessage: streamStartTS {}, length {}, streamOffset {}, timestamp {} last timestamp {} delta {} buffered {}", new Object[] { streamStartTS.get(), currentItem.get().getLength(), streamOffset, eventTime, lastMessageTs, delta, lastMessageTs - delta });
+            log.trace("sendMessage: streamStartTS {}, length {}, streamOffset {}, timestamp {} last timestamp {} delta {} buffered {}", streamStartTS.get(), currentItem.get().getLength(), streamOffset, eventTime, lastMessageTs, delta, lastMessageTs - delta);
         }
         if (playDecision == 1) { // 1 == vod/file
             if (eventTime > 0 && streamStartTS.compareAndSet(-1, eventTime)) {
@@ -1052,7 +1052,7 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
                 eventTime -= startTs;
                 messageOut.getBody().setTimestamp(eventTime);
                 if (log.isTraceEnabled()) {
-                    log.trace("sendMessage (updated): streamStartTS={}, length={}, streamOffset={}, timestamp={}", new Object[] { startTs, currentItem.get().getLength(), streamOffset, eventTime });
+                    log.trace("sendMessage (updated): streamStartTS={}, length={}, streamOffset={}, timestamp={}", startTs, currentItem.get().getLength(), streamOffset, eventTime);
                 }
             }
         }
@@ -1478,7 +1478,7 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
                                 // only check for frame dropping if the codec supports it
                                 long pendingVideos = pendingVideoMessages();
                                 if (log.isTraceEnabled()) {
-                                    log.trace("Pending messages sessionId={} pending={} threshold={} sequential={} stream={}, count={}", new Object[] { sessionId, pendingVideos, maxPendingVideoFrames, numSequentialPendingVideoFrames, subscriberStream.getBroadcastStreamPublishName(), droppedPacketsCount });
+                                    log.trace("Pending messages sessionId={} pending={} threshold={} sequential={} stream={}, count={}", sessionId, pendingVideos, maxPendingVideoFrames, numSequentialPendingVideoFrames, subscriberStream.getBroadcastStreamPublishName(), droppedPacketsCount);
                                 }
                                 if (!videoFrameDropper.canSendPacket(rtmpMessage, pendingVideos)) {
                                     // drop frame as it depends on other frames that were dropped before
@@ -1498,7 +1498,7 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
                                 if (pendingVideos > maxPendingVideoFrames || numSequentialPendingVideoFrames > maxSequentialPendingVideoFrames) {
                                     droppedPacketsCount++;
                                     if (log.isInfoEnabled() && shouldLogPacketDrop()) {
-                                        log.info("Drop packet. Pending above threshold. sessionId={} pending={} threshold={} sequential={} stream={} count={}", new Object[] { sessionId, pendingVideos, maxPendingVideoFrames, numSequentialPendingVideoFrames, subscriberStream.getBroadcastStreamPublishName(), droppedPacketsCount });
+                                        log.info("Drop packet. Pending above threshold. sessionId={} pending={} threshold={} sequential={} stream={} count={}", sessionId, pendingVideos, maxPendingVideoFrames, numSequentialPendingVideoFrames, subscriberStream.getBroadcastStreamPublishName(), droppedPacketsCount);
                                     }
                                     // drop because the client has insufficient bandwidth
                                     long now = System.currentTimeMillis();

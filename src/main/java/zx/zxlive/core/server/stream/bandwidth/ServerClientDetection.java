@@ -102,7 +102,7 @@ public class ServerClientDetection implements IPendingServiceCallback, IBandwidt
             log.debug("Call time stamps - write: {} read: {}", call.getWriteTime(), call.getReadTime());
             // time passed is in milliseconds
             timePassed = (now - startTime) / 1000000;
-            log.debug("Received count: {} sent: {} timePassed: {} ms", new Object[] { received, packetsSent.get(), timePassed });
+            log.debug("Received count: {} sent: {} timePassed: {} ms", received, packetsSent.get(), timePassed);
             switch (received) {
                 case 1:
                     // first packet is used to test latency
@@ -134,7 +134,7 @@ public class ServerClientDetection implements IPendingServiceCallback, IBandwidt
                     log.debug("Delta time: {} ms", deltaTime);
                     // calculate kbit/s
                     kbitDown = Math.round(deltaDown / (deltaTime / 1000d));
-                    log.debug("onBWDone: kbitDown: {} deltaDown: {} deltaTime: {} latency: {} ", new Object[] { kbitDown, deltaDown, deltaTime, latency });
+                    log.debug("onBWDone: kbitDown: {} deltaDown: {} deltaTime: {} latency: {} ", kbitDown, deltaDown, deltaTime, latency);
                     callBWDone();
             }
         } else {

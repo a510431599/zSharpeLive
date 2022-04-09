@@ -169,7 +169,7 @@ public class RTMPMinaProtocolEncoder extends ProtocolEncoderAdapter {
                     pos += length;
                 }
                 int remaining = message.remaining();
-                log.trace("Length: {} remaining: {} pos+len: {} limit: {}", new Object[] { length, remaining, (message.position() + length), limit });
+                log.trace("Length: {} remaining: {} pos+len: {} limit: {}", length, remaining, (message.position() + length), limit);
                 if (length > remaining) {
                     length = remaining;
                 }
@@ -181,7 +181,7 @@ public class RTMPMinaProtocolEncoder extends ProtocolEncoderAdapter {
 
         public static int chunkAndWrite(ProtocolEncoderOutput out, IoBuffer message, int chunkSize, int desiredSize) {
             int sentChunks = 0;
-            int targetSize = desiredSize > chunkSize ? desiredSize : chunkSize;
+            int targetSize = Math.max(desiredSize, chunkSize);
             int limit = message.limit();
             do {
                 int length = 0;
@@ -192,7 +192,7 @@ public class RTMPMinaProtocolEncoder extends ProtocolEncoderAdapter {
                     pos += length;
                 }
                 int remaining = message.remaining();
-                log.trace("Length: {} remaining: {} pos+len: {} limit: {}", new Object[] { length, remaining, (message.position() + length), limit });
+                log.trace("Length: {} remaining: {} pos+len: {} limit: {}", length, remaining, (message.position() + length), limit);
                 if (length > remaining) {
                     length = remaining;
                 }

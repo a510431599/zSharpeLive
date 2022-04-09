@@ -738,7 +738,7 @@ public abstract class RTMPConnection extends BaseConnection implements IStreamCa
     public boolean isValidStreamId(Number streamId) {
         double d = streamId.doubleValue();
         if (isTrace) {
-            log.trace("Checking validation for streamId {}; reservedStreams: {}; streams: {}, connection: {}", new Object[] { d, reservedStreams, streams, sessionId });
+            log.trace("Checking validation for streamId {}; reservedStreams: {}; streams: {}, connection: {}",  d, reservedStreams, streams, sessionId );
         }
         if (d <= 0 || !reservedStreams.contains(d)) {
             log.warn("Stream id: {} was not reserved in connection {}", d, sessionId);
@@ -1161,7 +1161,7 @@ public abstract class RTMPConnection extends BaseConnection implements IStreamCa
      */
     public void receivedBytesRead(int bytes) {
         if (isDebug) {
-            log.debug("Client received {} bytes, written {} bytes, {} messages pending", new Object[] { bytes, getWrittenBytes(), getPendingMessages() });
+            log.debug("Client received {} bytes, written {} bytes, {} messages pending",  bytes, getWrittenBytes(), getPendingMessages() );
         }
         clientBytesRead.addAndGet(bytes);
     }
@@ -1653,7 +1653,7 @@ public abstract class RTMPConnection extends BaseConnection implements IStreamCa
     public void ping() {
         long newPingTime = System.currentTimeMillis();
         if (isDebug) {
-            log.debug("Send Ping: session=[{}], currentTime=[{}], lastPingTime=[{}]", new Object[] { getSessionId(), newPingTime, lastPingSentOn.get() });
+            log.debug("Send Ping: session=[{}], currentTime=[{}], lastPingTime=[{}]",  getSessionId(), newPingTime, lastPingSentOn.get() );
         }
         if (lastPingSentOn.get() == 0) {
             lastPongReceivedOn.set(newPingTime);
@@ -1678,18 +1678,18 @@ public abstract class RTMPConnection extends BaseConnection implements IStreamCa
         int previousPingValue = (int) (previousPingTime & 0xffffffffL);
         int pongValue = pong.getValue2().intValue();
         if (isDebug) {
-            log.debug("Pong received: session=[{}] at {} with value {}, previous received at {}", new Object[] { getSessionId(), now, pongValue, previousPingValue });
+            log.debug("Pong received: session=[{}] at {} with value {}, previous received at {}",  getSessionId(), now, pongValue, previousPingValue );
         }
         if (pongValue == previousPingValue) {
             lastPingRoundTripTime.set((int) ((now - previousPingTime) & 0xffffffffL));
             if (isDebug) {
-                log.debug("Ping response session=[{}], RTT=[{} ms]", new Object[] { getSessionId(), lastPingRoundTripTime.get() });
+                log.debug("Ping response session=[{}], RTT=[{} ms]",  getSessionId(), lastPingRoundTripTime.get() );
             }
         } else {
             // don't log the congestion entry unless there are more than X messages waiting
             if (getPendingMessages() > 4) {
                 int pingRtt = (int) ((now & 0xffffffffL)) - pongValue;
-                log.info("Pong delayed: session=[{}], ping response took [{} ms] to arrive. Connection may be congested, or loopback", new Object[] { getSessionId(), pingRtt });
+                log.info("Pong delayed: session=[{}], ping response took [{} ms] to arrive. Connection may be congested, or loopback",  getSessionId(), pingRtt );
             }
         }
         lastPongReceivedOn.set(now);
@@ -1904,7 +1904,7 @@ public abstract class RTMPConnection extends BaseConnection implements IStreamCa
     public String toString() {
         if (isDebug) {
             String id = getClient() != null ? getClient().getId() : null;
-            return String.format("%1$s %2$s:%3$s to %4$s client: %5$s session: %6$s state: %7$s", new Object[] { getClass().getSimpleName(), getRemoteAddress(), getRemotePort(), getHost(), id, getSessionId(), RTMP.states[getStateCode()] });
+            return String.format("%1$s %2$s:%3$s to %4$s client: %5$s session: %6$s state: %7$s", getClass().getSimpleName(), getRemoteAddress(), getRemotePort(), getHost(), id, getSessionId(), RTMP.states[getStateCode()]);
         } else {
             Object[] args = new Object[] { getClass().getSimpleName(), getRemoteAddress(), getReadBytes(), getWrittenBytes(), getSessionId(), RTMP.states[getStateCode()] };
             return String.format("%1$s from %2$s (in: %3$s out: %4$s) session: %5$s state: %6$s", args);
@@ -1938,7 +1938,7 @@ public abstract class RTMPConnection extends BaseConnection implements IStreamCa
                             // get our last bytes read count
                             long previousReadBytes = lastBytesRead.get();
                             if (isTrace) {
-                                log.trace("Time now: {} current read count: {} last read count: {}", new Object[] { now, currentReadBytes, previousReadBytes });
+                                log.trace("Time now: {} current read count: {} last read count: {}",  now, currentReadBytes, previousReadBytes );
                             }
                             if (currentReadBytes > previousReadBytes) {
                                 if (isTrace) {
@@ -1954,9 +1954,9 @@ public abstract class RTMPConnection extends BaseConnection implements IStreamCa
                                 long lastPingTime = lastPingSentOn.get();
                                 long lastPongTime = lastPongReceivedOn.get();
                                 if (lastPongTime > 0 && (lastPingTime - lastPongTime > maxInactivity) && (now - lastBytesReadTime > maxInactivity)) {
-                                    log.warn("Closing connection - inactivity timeout: session=[{}], lastPongReceived=[{} ms ago], lastPingSent=[{} ms ago], lastDataRx=[{} ms ago]", new Object[] { getSessionId(), (lastPingTime - lastPongTime), (now - lastPingTime), (now - lastBytesReadTime) });
+                                    log.warn("Closing connection - inactivity timeout: session=[{}], lastPongReceived=[{} ms ago], lastPingSent=[{} ms ago], lastDataRx=[{} ms ago]",  getSessionId(), (lastPingTime - lastPongTime), (now - lastPingTime), (now - lastBytesReadTime) );
                                     // the following line deals with a very common support request
-                                    log.warn("Client on session=[{}] has not responded to our ping for [{} ms] and we haven't received data for [{} ms]", new Object[] { getSessionId(), (lastPingTime - lastPongTime), (now - lastBytesReadTime) });
+                                    log.warn("Client on session=[{}] has not responded to our ping for [{} ms] and we haven't received data for [{} ms]",  getSessionId(), (lastPingTime - lastPongTime), (now - lastBytesReadTime) );
                                     onInactive();
                                 } else {
                                     // send ping command to client to trigger sending of data

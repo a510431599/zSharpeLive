@@ -302,7 +302,7 @@ public class FLVWriter implements ITagWriter {
                     int bodySize = IOUtils.readUnsignedMediumInt(dst); // 3
                     int timestamp = IOUtils.readExtendedMediumInt(dst); // 4
                     int streamId = IOUtils.readUnsignedMediumInt(dst); // 3
-                    log.debug("Data type: {} timestamp: {} stream id: {} body size: {}", new Object[] { tagType, timestamp, streamId, bodySize });
+                    log.debug("Data type: {} timestamp: {} stream id: {} body size: {}", tagType, timestamp, streamId, bodySize);
                     if (tagType == ITag.TYPE_METADATA) {
                         ByteBuffer buf = ByteBuffer.allocate(bodySize);
                         read = channel.read(buf);
@@ -744,7 +744,7 @@ public class FLVWriter implements ITagWriter {
      * @throws InterruptedException
      */
     private void writeMetadataTag(double duration, int videoCodecId, int audioCodecId) throws IOException, InterruptedException, ExecutionException {
-        log.debug("writeMetadataTag - duration: {} video codec: {} audio codec: {}", new Object[] { duration, videoCodecId, audioCodecId });
+        log.debug("writeMetadataTag - duration: {} video codec: {} audio codec: {}", duration, videoCodecId, audioCodecId);
         IoBuffer buf = IoBuffer.allocate(256);
         buf.setAutoExpand(true);
         Output out = new Output(buf);

@@ -359,13 +359,13 @@ public class Scope extends BasicScope implements IScope, IScopeStatistics, Scope
                 try {
                     handler.disconnect(conn, this);
                 } catch (Exception e) {
-                    log.error("Error while executing \"disconnect\" for connection {} on handler {}. {}", new Object[] { conn, handler, e });
+                    log.error("Error while executing \"disconnect\" for connection {} on handler {}. {}", conn, handler, e);
                 }
                 try {
                     // there may be a timeout here ?
                     handler.leave(client, this);
                 } catch (Exception e) {
-                    log.error("Error while executing \"leave\" for client {} on handler {}. {}", new Object[] { conn, handler, e });
+                    log.error("Error while executing \"leave\" for client {} on handler {}. {}", conn, handler, e);
                 }
             }
             // remove listener

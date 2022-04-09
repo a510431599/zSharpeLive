@@ -111,7 +111,7 @@ public class ServiceInvoker implements IServiceInvoker {
     public boolean invoke(IServiceCall call, Object service) {
         IConnection conn = Red5.getConnectionLocal();
         String methodName = call.getServiceMethodName();
-        log.debug("Service: {} name: {} method: {}", new Object[] { service, call.getServiceName(), methodName });
+        log.debug("Service: {} name: {} method: {}", service, call.getServiceName(), methodName);
         // pull off the prefixes since java doesnt allow this on a method name
         if (methodName.charAt(0) == '@') {
             log.debug("Method name contained an illegal prefix, it will be removed: {}", methodName);
@@ -147,7 +147,7 @@ public class ServiceInvoker implements IServiceInvoker {
                     // Fourth, search for method without the connection as first parameter in a list argument.
                     methodResult = ReflectionUtils.findMethodWithListParameters(service, methodName, args);
                     if (methodResult.length == 0 || methodResult[0] == null) {
-                        log.error("Method {} with parameters {} not found in {}", new Object[] { methodName, (args == null ? Collections.EMPTY_LIST : Arrays.asList(args)), service });
+                        log.error("Method {} with parameters {} not found in {}", methodName, (args == null ? Collections.EMPTY_LIST : Arrays.asList(args)), service);
                         call.setStatus(Call.STATUS_METHOD_NOT_FOUND);
                         if (args != null && args.length > 0) {
                             call.setException(new MethodNotFoundException(methodName, args));
@@ -172,7 +172,7 @@ public class ServiceInvoker implements IServiceInvoker {
             if (annotation != null) {
                 if (!conn.getClient().hasPermission(conn, annotation.permission())) {
                     // client doesn't have required permission
-                    log.debug("Client {} doesn't have required permission {} to call {}", new Object[] { conn.getClient(), annotation.permission(), method });
+                    log.debug("Client {} doesn't have required permission {} to call {}", conn.getClient(), annotation.permission(), method);
                     throw new NotAllowedException("Access denied, method is protected");
                 }
             }

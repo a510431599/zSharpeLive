@@ -81,7 +81,7 @@ public abstract class StreamUtils {
      *            ServerStream object
      */
     public static void putServerStream(IScope scope, String name, IServerStream stream) {
-        logger.debug("Putting server stream in the map - name: {} scope: {} stream: {}", new Object[] { name, scope, stream });
+        logger.debug("Putting server stream in the map - name: {} scope: {} stream: {}", name, scope, stream);
         String key = scope.getName() + '/' + name;
         if (!serverStreamMap.containsKey(key)) {
             serverStreamMap.put(key, stream);

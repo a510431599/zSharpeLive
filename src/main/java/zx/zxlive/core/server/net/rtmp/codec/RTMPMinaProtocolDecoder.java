@@ -53,7 +53,7 @@ public class RTMPMinaProtocolDecoder extends ProtocolDecoderAdapter {
             Red5.setConnectionLocal(conn);
             // copy data range from incoming
             if (log.isTraceEnabled()) {
-                log.trace("Incoming: in.position {}, in.limit {}, in.remaining {}", new Object[] { in.position(), in.limit(), in.remaining() });
+                log.trace("Incoming: in.position {}, in.limit {}, in.remaining {}", in.position(), in.limit(), in.remaining());
             }
             byte[] arr = new byte[in.remaining()];
             in.get(arr);
@@ -70,7 +70,7 @@ public class RTMPMinaProtocolDecoder extends ProtocolDecoderAdapter {
             buf.flip();
             if (log.isTraceEnabled()) {
                 //log.trace("Buffer before: {}", Hex.encodeHexString(arr));
-                log.trace("Buffers info before: buf.position {}, buf.limit {}, buf.remaining {}", new Object[] { buf.position(), buf.limit(), buf.remaining() });
+                log.trace("Buffers info before: buf.position {}, buf.limit {}, buf.remaining {}", buf.position(), buf.limit(), buf.remaining());
             }
             // get the connections decoder lock
             final Semaphore lock = conn.getDecoderLock();
@@ -97,7 +97,7 @@ public class RTMPMinaProtocolDecoder extends ProtocolDecoderAdapter {
             }
             if (log.isTraceEnabled()) {
                 //log.trace("Buffer after: {}", Hex.encodeHexString(Arrays.copyOfRange(buf.array(), buf.position(), buf.limit())));
-                log.trace("Buffers info after: buf.position {}, buf.limit {}, buf.remaining {}", new Object[] { buf.position(), buf.limit(), buf.remaining() });
+                log.trace("Buffers info after: buf.position {}, buf.limit {}, buf.remaining {}", buf.position(), buf.limit(), buf.remaining());
             }
         } else {
             log.debug("Closing and skipping decode for unregistered connection: {}", sessionId);

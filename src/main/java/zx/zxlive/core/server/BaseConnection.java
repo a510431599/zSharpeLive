@@ -178,7 +178,7 @@ public abstract class BaseConnection extends AttributeStore implements IConnecti
      */
     @ConstructorProperties({ "type", "host", "remoteAddress", "remotePort", "path", "sessionId" })
     public BaseConnection(String type, String host, String remoteAddress, int remotePort, String path, String sessionId, Map<String, Object> params) {
-        log.debug("New BaseConnection - type: {} host: {} remoteAddress: {} remotePort: {} path: {} sessionId: {}", new Object[] { type, host, remoteAddress, remotePort, path, sessionId });
+        log.debug("New BaseConnection - type: {} host: {} remoteAddress: {} remotePort: {} path: {} sessionId: {}", type, host, remoteAddress, remotePort, path, sessionId);
         log.debug("Params: {}", params);
         if (type != null) {
             this.type = Type.valueOf(type.toUpperCase());

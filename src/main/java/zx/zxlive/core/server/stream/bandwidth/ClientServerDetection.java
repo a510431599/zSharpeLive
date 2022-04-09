@@ -62,7 +62,7 @@ public class ClientServerDetection implements IPendingServiceCallback {
         statsValues.put("cOutBytes", stats.getReadBytes());
         statsValues.put("cInBytes", stats.getWrittenBytes());
         statsValues.put("time", time.intValue());
-        log.debug("cOutBytes: {} cInBytes: {} time: {}", new Object[] { stats.getReadBytes(), stats.getWrittenBytes(), time });
+        log.debug("cOutBytes: {} cInBytes: {} time: {}", stats.getReadBytes(), stats.getWrittenBytes(), time);
         return statsValues;
     }
 

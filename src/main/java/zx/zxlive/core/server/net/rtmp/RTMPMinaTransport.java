@@ -142,7 +142,7 @@ public class RTMPMinaTransport implements RTMPMinaTransportBean {
             // dont pool for heap buffers
             IoBuffer.setAllocator(new SimpleBufferAllocator());
         }
-        log.info("RTMP Mina Transport Settings\nAcceptor style: {} I/O threads: {}\nTCP no-delay: {} keep-alive: {}", new Object[] { (enableDefaultAcceptor ? "default" : "blocking-queue"), ioThreads, tcpNoDelay, keepAlive });
+        log.info("RTMP Mina Transport Settings\nAcceptor style: {} I/O threads: {}\nTCP no-delay: {} keep-alive: {}", (enableDefaultAcceptor ? "default" : "blocking-queue"), ioThreads, tcpNoDelay, keepAlive);
         // use the defaults
         if (enableDefaultAcceptor) {
             //constructs an acceptor using default parameters, and given number of NioProcessor for multithreading I/O operations.
@@ -200,7 +200,7 @@ public class RTMPMinaTransport implements RTMPMinaTransportBean {
             sessionConf.setTrafficClass(trafficClass);
         }
         // get info
-        log.info("Send buffer size: {} recv buffer size: {} so linger: {} traffic class: {}", new Object[] { sessionConf.getSendBufferSize(), sessionConf.getReceiveBufferSize(), sessionConf.getSoLinger(), sessionConf.getTrafficClass() });
+        log.info("Send buffer size: {} recv buffer size: {} so linger: {} traffic class: {}", sessionConf.getSendBufferSize(), sessionConf.getReceiveBufferSize(), sessionConf.getSoLinger(), sessionConf.getTrafficClass());
         // set reuse address on the socket acceptor as well
         acceptor.setReuseAddress(true);
         try {
@@ -217,10 +217,10 @@ public class RTMPMinaTransport implements RTMPMinaTransportBean {
             log.debug("Binding to {}", socketAddresses);
             acceptor.bind(socketAddresses);
             // create a new mbean for this instance RTMPMinaTransport
-            String cName = this.getClass().getName();
-            if (cName.indexOf('.') != -1) {
-                cName = cName.substring(cName.lastIndexOf('.')).replaceFirst("[\\.]", "");
-            }
+//            String cName = this.getClass().getName();
+//            if (cName.indexOf('.') != -1) {
+//                cName = cName.substring(cName.lastIndexOf('.')).replaceFirst("[\\.]", "");
+//            }
             //enable only if user wants it
             if (enableMinaMonitor) {
                 //add a stats to allow for more introspection into the workings of mina

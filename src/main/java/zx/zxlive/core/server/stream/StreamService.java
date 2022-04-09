@@ -317,7 +317,7 @@ public class StreamService implements IStreamService {
 
     /** {@inheritDoc} */
     public void play(String name, int start, int length, boolean flushPlaylist) {
-        log.debug("Play called - name: {} start: {} length: {} flush playlist: {}", new Object[] { name, start, length, flushPlaylist });
+        log.debug("Play called - name: {} start: {} length: {} flush playlist: {}", name, start, length, flushPlaylist);
         IConnection conn = Red5.getConnectionLocal();
         if (conn instanceof IStreamCapableConnection) {
             IScope scope = conn.getScope();
