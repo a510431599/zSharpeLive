@@ -1418,17 +1418,14 @@ public class Scope extends BasicScope implements IScope, IScopeStatistics, Scope
          * @return scope
          */
         public IBasicScope getBasicScope(ScopeType type, String name) {
-            Optional<IBasicScope> scope = null;
+            Optional<IBasicScope> scope;
             // skip type check?
             if (ScopeType.UNDEFINED.equals(type)) {
                 scope = stream().filter(child -> name.equals(child.getName())).findFirst();
             } else {
                 scope = stream().filter(child -> child.getType().equals(type) && name.equals(child.getName())).findFirst();
             }
-            if (scope.isPresent()) {
-                return scope.get();
-            }
-            return null;
+            return scope.orElse(null);
         }
 
     }

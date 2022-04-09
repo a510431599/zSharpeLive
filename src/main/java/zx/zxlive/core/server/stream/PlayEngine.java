@@ -399,7 +399,7 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
                     // drop all frames up to the next keyframe
                     videoFrameDropper.reset(IFrameDropper.SEND_KEYFRAMES_CHECK);
                     if (in instanceof IBroadcastScope) {
-                        IBroadcastStream stream = (IBroadcastStream) ((IBroadcastScope) in).getClientBroadcastStream();
+                        IBroadcastStream stream = ((IBroadcastScope) in).getClientBroadcastStream();
                         if (stream != null && stream.getCodecInfo() != null) {
                             IVideoStreamCodec videoCodec = stream.getCodecInfo().getVideoCodec();
                             if (videoCodec != null) {
@@ -525,7 +525,7 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
         IMessageOutput out = msgOutReference.get();
         if (in != null && out != null) {
             // get the stream so that we can grab any metadata and decoder configs
-            IBroadcastStream stream = (IBroadcastStream) ((IBroadcastScope) in).getClientBroadcastStream();
+            IBroadcastStream stream = ((IBroadcastScope) in).getClientBroadcastStream();
             // prevent an NPE when a play list is created and then immediately flushed
             int ts = 0;
             if (stream != null) {

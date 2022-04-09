@@ -14,12 +14,7 @@ import java.lang.ref.WeakReference;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -298,7 +293,7 @@ public class ClientBroadcastStream extends AbstractClientStream implements IClie
                         //log.trace("Video: {}", eventTime);
                         IVideoStreamCodec videoStreamCodec = null;
                         if (checkVideoCodec) {
-                            videoStreamCodec = VideoCodecFactory.getVideoCodec(buf);
+                            videoStreamCodec = VideoCodecFactory.getVideoCodec(Objects.requireNonNull(buf));
                             if (info != null) {
                                 info.setVideoCodec(videoStreamCodec);
                             }

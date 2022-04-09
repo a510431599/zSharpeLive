@@ -8,13 +8,7 @@
 package zx.zxlive.core.server.net.rtmp;
 
 import java.beans.ConstructorProperties;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -1456,13 +1450,9 @@ public abstract class RTMPConnection extends BaseConnection implements IStreamCa
                         ReceivedMessageTaskQueue newStreamTasks = new ReceivedMessageTaskQueue(streamId, this);
                         // put the queue in the task by stream map
                         ReceivedMessageTaskQueue currentStreamTasks = tasksByStreams.putIfAbsent(streamId, newStreamTasks);
-                        if (currentStreamTasks != null) {
-                            // add the task to the existing queue
-                            currentStreamTasks.addTask(task);
-                        } else {
-                            // add the task to the newly created and just added queue
-                            newStreamTasks.addTask(task);
-                        }
+                        // add the task to the existing queue
+                        // add the task to the newly created and just added queue
+                        Objects.requireNonNullElse(currentStreamTasks, newStreamTasks).addTask(task);
                     } catch (Exception e) {
                         log.error("Incoming message handling failed on session=[" + sessionId + "], messageType=[" + messageType + "]", e);
                         if (isDebug) {
@@ -1486,13 +1476,11 @@ public abstract class RTMPConnection extends BaseConnection implements IStreamCa
                         try {
                             // DTS appears to be off only by < 10ms
                             Packet p = receivedPacketQueue.take();
-                            if (p != null) {
-                                if (isTrace) {
-                                    log.trace("Handle received packet: {}", p);
-                                }
-                                // pass message to the handler where any sorting or delays would need to be injected
-                                handler.messageReceived(conn, p);
+                            if (isTrace) {
+                                log.trace("Handle received packet: {}", p);
                             }
+                            // pass message to the handler where any sorting or delays would need to be injected
+                            handler.messageReceived(conn, p);
                         } catch (Exception e) {
                             log.error("Error processing received message {} state: {}", sessionId, RTMP.states[getStateCode()], e);
                         }
