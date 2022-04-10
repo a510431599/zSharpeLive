@@ -60,8 +60,6 @@ import zx.zxlive.common.io.ITagWriter;
  * 
  * @author The zSharpe Project
  * @author Vic Wang (xiaoyu860912@163.com)
- * @author Vladimir Hmelyoff (vlhm@splitmedialabs.com)
- * @author Octavian Naicu (naicuoctavian@gmail.com)
  */
 public class SlicedFileConsumer implements Constants, IPushableConsumer, IPipeConnectionListener, DisposableBean, IFileConsumer {
 

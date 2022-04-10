@@ -11,7 +11,7 @@ package zx.zxlive.common.io.flv.meta;
  * Cue point type
  *
  * @author The zSharpe Project
- * @author daccattato(daccattato@gmail.com)
+ * @author Vic Wang (xiaoyu860912@163.com)
  * @author Vic Wang (xiaoyu860912@163.com)
  */
 public interface ICueType {

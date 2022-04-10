@@ -37,7 +37,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * Servlet that handles remoting requests.
  * 
  * @author The zSharpe Project
- * @author Luke Hubbard (luke@codegent.com)
  * @author Vic Wang (xiaoyu860912@163.com)
  */
 public class AMFGatewayServlet extends HttpServlet {

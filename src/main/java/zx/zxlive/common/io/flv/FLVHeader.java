@@ -16,9 +16,7 @@ import org.apache.mina.core.buffer.IoBuffer;
  * @see <a href="https://code.google.com/p/red5/wiki/FLV#FLV_Header">FLV Header</a>
  *
  * @author The zSharpe Project
- * @author Dominick Accattato (daccattato@gmail.com)
  * @author Vic Wang (xiaoyu860912@163.com)
- * @author Tiago Jacobs (tiago@imdt.com.br)
  */
 public class FLVHeader {
 
@@ -41,7 +39,7 @@ public class FLVHeader {
     /**
      * Reserved flag, one
      */
-    public static byte flagReserved01 = 0x00 & 0xff;
+    public static byte flagReserved01 = 0;
 
     /**
      * Audio flag
@@ -51,7 +49,7 @@ public class FLVHeader {
     /**
      * Reserved flag, two
      */
-    public static byte flagReserved02 = 0x00 & 0xff;
+    public static byte flagReserved02 = 0;
 
     /**
      * Video flag
@@ -62,7 +60,7 @@ public class FLVHeader {
     /**
      * reserved for data up to 4,294,967,295
      */
-    public int dataOffset = 0x00 & 0xff;
+    public int dataOffset = 0;
 
     /**
      * Returns the data offset bytes

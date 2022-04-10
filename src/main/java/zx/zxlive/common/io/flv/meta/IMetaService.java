@@ -16,7 +16,6 @@ import org.apache.mina.core.buffer.IoBuffer;
  * IMetaService Defines the MetaData Service API
  * 
  * @author The zSharpe Project
- * @author Dominick Accattato (daccattato@gmail.com)
  * @author Vic Wang (xiaoyu860912@163.com)
  */
 public interface IMetaService {

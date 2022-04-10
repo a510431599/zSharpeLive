@@ -11,7 +11,7 @@ package zx.zxlive.core.server.api.stream;
  * Extends stream to add methods for on demand access.
  * 
  * @author The zSharpe Project
- * @author Luke Hubbard (luke@codegent.com)
+ * @author Vic Wang (xiaoyu860912@163.com)
  */
 public interface IOnDemandStream extends IStream {
 

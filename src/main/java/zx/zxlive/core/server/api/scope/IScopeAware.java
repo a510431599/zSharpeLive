@@ -11,7 +11,6 @@ package zx.zxlive.core.server.api.scope;
  * Maker interface for all objects that are aware of the scope they are located in.
  * 
  * @author The zSharpe Project
- * @author Luke Hubbard (luke@codegent.com)
  */
 public interface IScopeAware {
 

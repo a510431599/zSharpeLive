@@ -20,7 +20,7 @@ import zx.zxlive.core.server.api.service.IServiceCall;
  * The thread local connection is always available via the Red5 object within these methods
  * 
  * @author The zSharpe Project
- * @author Luke Hubbard (luke@codegent.com)
+ * @author Vic Wang (xiaoyu860912@163.com)
  */
 public interface IScopeHandler extends IEventHandler {
 

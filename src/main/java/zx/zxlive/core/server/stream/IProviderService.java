@@ -20,7 +20,7 @@ import zx.zxlive.core.server.api.stream.IBroadcastStream;
  */
 public interface IProviderService extends IScopeService {
 
-    public final static String BEAN_NAME = "providerService";
+    String BEAN_NAME = "providerService";
 
     enum INPUT_TYPE {
         NOT_FOUND, LIVE, LIVE_WAIT, VOD;

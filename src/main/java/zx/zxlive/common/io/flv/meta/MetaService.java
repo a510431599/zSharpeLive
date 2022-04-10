@@ -32,7 +32,6 @@ import org.slf4j.LoggerFactory;
  * MetaService represents a MetaData service in Spring
  * 
  * @author The zSharpe Project
- * @author Dominick Accattato (daccattato@gmail.com)
  * @author Vic Wang (xiaoyu860912@163.com)
  */
 public class MetaService implements IMetaService {

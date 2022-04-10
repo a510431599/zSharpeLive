@@ -19,7 +19,6 @@ import java.nio.file.Paths;
  *
  * @author The zSharpe Project
  * @author Vic Wang (xiaoyu860912@163.com)
- * @author Dominick Accattato (daccattato@gmail.com)
  */
 public class Bootstrap {
 

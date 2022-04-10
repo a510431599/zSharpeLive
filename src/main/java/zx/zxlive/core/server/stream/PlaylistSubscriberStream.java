@@ -197,7 +197,7 @@ public class PlaylistSubscriberStream extends AbstractClientStream implements IP
                     //try the parent
                     consumerService = (IConsumerService) scope.getParent().getContext().getBean(IConsumerService.KEY);
                 }
-                IProviderService providerService = null;
+                IProviderService providerService;
                 if (ctx.hasBean(IProviderService.BEAN_NAME)) {
                     providerService = (IProviderService) ctx.getBean(IProviderService.BEAN_NAME);
                 } else {

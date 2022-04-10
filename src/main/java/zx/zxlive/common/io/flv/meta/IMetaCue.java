@@ -11,7 +11,7 @@ package zx.zxlive.common.io.flv.meta;
  * ICuePoint defines contract methods for use with cuepoints
  * 
  * @author The zSharpe Project
- * @author Dominick Accattato (daccattato@gmail.com)
+ * @author Vic Wang (xiaoyu860912@163.com)
  */
 public interface IMetaCue extends IMeta, Comparable<Object> {
 

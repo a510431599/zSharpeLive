@@ -41,7 +41,6 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  * Red5 applications loader
  * 
  * @author The zSharpe Project
- * @author Tiago Jacobs (tiago@imdt.com.br)
  * @author Vic Wang (xiaoyu860912@163.com)
  */
 //@ManagedResource(objectName = "zx.zxlive.common.server:name=contextLoader,type=ContextLoader", description = "ContextLoader")

@@ -34,7 +34,6 @@ import org.slf4j.Logger;
  * </pre>
  * 
  * @author The zSharpe Project
- * @author Luke Hubbard (luke@codegent.com)
  * @author Vic Wang (xiaoyu860912@163.com)
  * @author Tiago Daniel Jacobs (os@tdj.cc)
  */

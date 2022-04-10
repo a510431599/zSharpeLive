@@ -14,7 +14,7 @@ import java.util.Map;
  * MetaData Implementation
  *
  * @author The zSharpe Project
- * @author Dominick Accattato (daccattato@gmail.com)
+ * @author Vic Wang (xiaoyu860912@163.com)
  *
  *         Example:
  *

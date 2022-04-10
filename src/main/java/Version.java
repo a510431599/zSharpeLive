@@ -3,7 +3,7 @@ import zx.zxlive.core.server.api.Red5;
 /**
  * Provides information about the version of Red5 being used.
  * 
- * @author Paul Gregoire
+ * @author Vic Wang (xiaoyu860912@163.com)
  */
 public class Version {
 

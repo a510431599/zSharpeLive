@@ -16,7 +16,6 @@ import zx.zxlive.core.server.api.IAttributeStore;
  * Notifications about shared object updates.
  * 
  * @author The zSharpe Project
- * @author Luke Hubbard (luke@codegent.com)
  * @author Vic Wang (xiaoyu860912@163.com)
  */
 public interface ISharedObjectListener {

@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * Launches Red5.
  *
- * @author The zSharpe Project
  * @author Vic Wang (xiaoyu860912@163.com)
  */
 @EnableMBeanExport

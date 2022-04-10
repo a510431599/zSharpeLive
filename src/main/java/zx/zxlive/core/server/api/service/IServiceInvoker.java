@@ -13,7 +13,7 @@ import zx.zxlive.core.server.api.scope.IScope;
  * Interface for objects that execute service calls (remote calls from client).
  * 
  * @author The zSharpe Project
- * @author Luke Hubbard (luke@codegent.com)
+ * @author Vic Wang (xiaoyu860912@163.com)
  */
 public interface IServiceInvoker {
 

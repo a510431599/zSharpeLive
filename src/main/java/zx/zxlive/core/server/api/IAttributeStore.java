@@ -16,7 +16,7 @@ import zx.zxlive.core.server.jmx.mxbeans.AttributeStoreBean;
  * Base interface for all API objects with attributes
  * 
  * @author The zSharpe Project
- * @author Luke Hubbard (luke@codegent.com)
+ * @author Vic Wang (xiaoyu860912@163.com)
  */
 public interface IAttributeStore extends AttributeStoreBean {
 

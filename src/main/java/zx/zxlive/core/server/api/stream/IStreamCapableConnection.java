@@ -15,7 +15,6 @@ import zx.zxlive.core.server.api.IConnection;
  * A connection that supports streaming.
  * 
  * @author The zSharpe Project
- * @author Luke Hubbard (luke@codegent.com)
  * @author Vic Wang (xiaoyu860912@163.com)
  */
 public interface IStreamCapableConnection extends IConnection {

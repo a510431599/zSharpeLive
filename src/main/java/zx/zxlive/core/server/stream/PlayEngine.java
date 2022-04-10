@@ -72,11 +72,7 @@ import zx.zxlive.common.io.amf.Output;
  * A play engine for playing a IPlayItem.
  * 
  * @author The zSharpe Project
- * @author Steven Gong
  * @author Vic Wang (xiaoyu860912@163.com)
- * @author Dan Rossi
- * @author Tiago Daniel Jacobs (tiago@imdt.com.br)
- * @author Vladimir Hmelyoff (vlhm@splitmedialabs.com)
  */
 public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnectionListener {
 
@@ -282,19 +278,21 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
         if (log.isDebugEnabled()) {
             log.debug("start - subscriber stream state: {}", (subscriberStream != null ? subscriberStream.getState() : null));
         }
-        switch (subscriberStream.getState()) {
-            case UNINIT:
-                // allow start if uninitialized and change state to stopped
-                subscriberStream.setState(StreamState.STOPPED);
-                IMessageOutput out = consumerService.getConsumerOutput(subscriberStream);
-                if (msgOutReference.compareAndSet(null, out)) {
-                    out.subscribe(this, null);
-                } else if (log.isDebugEnabled()) {
-                    log.debug("Message output was already set for stream: {}", subscriberStream);
-                }
-                break;
-            default:
-                throw new IllegalStateException(String.format("Cannot start in current state: %s", subscriberStream.getState()));
+        if (subscriberStream != null) {
+            switch (subscriberStream.getState()) {
+                case UNINIT:
+                    // allow start if uninitialized and change state to stopped
+                    subscriberStream.setState(StreamState.STOPPED);
+                    IMessageOutput out = consumerService.getConsumerOutput(subscriberStream);
+                    if (msgOutReference.compareAndSet(null, out)) {
+                        out.subscribe(this, null);
+                    } else if (log.isDebugEnabled()) {
+                        log.debug("Message output was already set for stream: {}", subscriberStream);
+                    }
+                    break;
+                default:
+                    throw new IllegalStateException(String.format("Cannot start in current state: %s", subscriberStream.getState()));
+            }
         }
     }
 
@@ -331,7 +329,7 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
      *             Stream had IO exception
      */
     public void play(IPlayItem item, boolean withReset) throws StreamNotFoundException, IllegalStateException, IOException {
-        IMessageInput in = null;
+        IMessageInput in;
         // cannot play if state is not stopped
         switch (subscriberStream.getState()) {
             case STOPPED:
@@ -1456,7 +1454,7 @@ public final class PlayEngine implements IFilter, IPushableConsumer, IPipeConnec
                     // We only want to drop packets from a live stream. VOD streams we let it buffer.
                     // We don't want a user watching a movie to see a choppy video due to low bandwidth.
                     if (msgIn instanceof IBroadcastScope) {
-                        IBroadcastStream stream = (IBroadcastStream) ((IBroadcastScope) msgIn).getClientBroadcastStream();
+                        IBroadcastStream stream = ((IBroadcastScope) msgIn).getClientBroadcastStream();
                         if (stream != null && stream.getCodecInfo() != null) {
                             IVideoStreamCodec videoCodec = stream.getCodecInfo().getVideoCodec();
                             // dont try to drop frames if video codec is null

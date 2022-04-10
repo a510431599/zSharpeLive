@@ -11,7 +11,7 @@ package zx.zxlive.common.io.flv.meta;
  * FLV MetaData interface
  * 
  * @author The zSharpe Project
- * @author Dominick Accattato (daccattato@gmail.com)
+ * @author Vic Wang (xiaoyu860912@163.com)
  * 
  *         Sample Data: private boolean canSeekToEnd = true; private int videocodecid = 4; private int framerate = 15; private int videodatarate = 400; private int height = 215; private int width = 320; private int duration = 7.347;
  * @param <K>

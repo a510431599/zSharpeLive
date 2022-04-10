@@ -151,7 +151,7 @@ public class ConnectionConsumer implements IPushableConsumer, IPipeConnectionLis
             // XXX sets the timerbase, but should we do this if there's already a timerbase?
             header.setTimerBase(eventTime);
             // data buffer
-            IoBuffer buf = null;
+            IoBuffer buf;
             switch (dataType) {
                 case Constants.TYPE_AGGREGATE:
                     //log.trace("Aggregate data");
@@ -164,7 +164,7 @@ public class ConnectionConsumer implements IPushableConsumer, IPipeConnectionLis
                         AudioData audioData = new AudioData(buf.asReadOnlyBuffer());
                         audioData.setHeader(header);
                         audioData.setTimestamp(header.getTimer());
-                        audioData.setSourceType(((AudioData) msg).getSourceType());
+                        audioData.setSourceType(msg.getSourceType());
                         audio.write(audioData);
                     } else {
                         log.warn("Audio data was not found");
@@ -177,7 +177,7 @@ public class ConnectionConsumer implements IPushableConsumer, IPipeConnectionLis
                         VideoData videoData = new VideoData(buf.asReadOnlyBuffer());
                         videoData.setHeader(header);
                         videoData.setTimestamp(header.getTimer());
-                        videoData.setSourceType(((VideoData) msg).getSourceType());
+                        videoData.setSourceType(msg.getSourceType());
                         video.write(videoData);
                     } else {
                         log.warn("Video data was not found");
@@ -203,7 +203,7 @@ public class ConnectionConsumer implements IPushableConsumer, IPipeConnectionLis
                     //if (log.isTraceEnabled()) {
                     //log.trace("Flex stream send: {}", (Notify) msg);
                     //}
-                    FlexStreamSend send = null;
+                    FlexStreamSend send;
                     if (msg instanceof FlexStreamSend) {
                         send = (FlexStreamSend) msg;
                     } else {

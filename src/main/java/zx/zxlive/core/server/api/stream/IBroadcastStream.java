@@ -18,7 +18,6 @@ import zx.zxlive.core.server.net.rtmp.event.Notify;
  * 
  * 
  * @author The zSharpe Project
- * @author Luke Hubbard (luke@codegent.com)
  * @author Vic Wang (xiaoyu860912@163.com)
  */
 public interface IBroadcastStream extends IStream {
