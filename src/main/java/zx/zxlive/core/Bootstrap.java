@@ -84,7 +84,6 @@ public class Bootstrap {
                 if (!f.exists()) {
                     f.mkdir();
                 }
-                f = null;
             } else {
                 dir += "\\AppData\\localLow";
             }
